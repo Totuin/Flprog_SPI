@@ -1,8 +1,8 @@
-#include "flprogSpiAvr.h"
+#include "flprogSpiRp2040.h"
 
 #ifdef ARDUINO_ARCH_AVR
 
-FLProgSPI::FLProgSPI(uint8_t busNumber)
+FLProgSPI::FLProgSPI(uint8_t _busNumber)
 {
     busNumber = _busNumber
 }
@@ -18,7 +18,7 @@ bool FLProgSPI::begin()
     return true;
 }
 
-void FLProgSPI::setBitOrder(uint8_t mode)
+void FLProgSPI::setBitOrder(BitOrder mode)
 {
     if (!checkBus())
     {
@@ -34,7 +34,10 @@ SPIClass *FLProgSPI::bus()
     {
         return &SPI;
     }
+    if (busNumber == 1)
+    {
+        return &SPI1;
+    }
     return 0;
 }
-
 #endif

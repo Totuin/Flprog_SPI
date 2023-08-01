@@ -2,7 +2,7 @@
 #include "Arduino.h"
 #include "flprogSPI.h"
 
-#ifdef FLPROG_CORE_STM8
+#ifdef ARDUINO_ARCH_AVR
 
 #define FLPROG_SPI_MODE0 SPI_MODE0
 #define FLPROG_SPI_MODE1 SPI_MODE1
@@ -15,9 +15,12 @@
 class FLProgSPI : public AbstractFLProgSPI
 {
 public:
-    FLProgSPI(uint8_t busNumber = 0);
+    FLProgSPI(uint8_t _busNumber = 0);
+    virtual void setBitOrder(BitOrder mode);
     virtual bool begin();
-    virtual void setBitOrder(BitOrder mode) { spi->setBitOrder(mode); };
+
+protected:
+    virtual SPIClass *bus();
 };
 
 #endif

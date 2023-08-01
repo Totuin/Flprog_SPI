@@ -1,21 +1,10 @@
 #include "flprogSpiEsp32.h"
 
-#ifdef FLPROG_CORE_ESP32
+#ifdef ARDUINO_ARCH_ESP32
 
-FLProgSPI::FLProgSPI(uint8_t busNumber)
+FLProgSPI::FLProgSPI(uint8_t _busNumber)
 {
-#ifdef FLPROG_HAS_SPI0
-    if (busNumber == 0)
-    {
-        spi = &SPI;
-    }
-#endif
-#ifdef FLPROG_HAS_SPI1
-    if (busNumber == 1)
-    {
-        spi = &SPI1;
-    }
-#endif
+    busNumber = _busNumber
 }
 
 bool FLProgSPI::begin()
@@ -25,7 +14,26 @@ bool FLProgSPI::begin()
         codeErr = 65;
         return false;
     }
-    spi->begin();
+    bus()->begin();
     return true;
 }
+void FLProgSPI::setBitOrder(uint8_t mode)
+{
+    if (!checkBus())
+    {
+        codeErr = 65;
+        return;
+    }
+    bus()->setBitOrder(mode);
+}
+
+SPIClass *FLProgSPI::bus()
+{
+    if (busNumber == 0)
+    {
+        return &SPI;
+    }
+    return 0;
+}
+
 #endif
