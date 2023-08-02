@@ -2,14 +2,6 @@
 
 #ifdef ARDUINO_ARCH_AVR
 
-FLProgSPI::FLProgSPI(uint8_t _busNumber, int32_t _pinMOSI, int32_t _pinMISO, int32_t _pinSCLK)
-{
-    pinMosi = _pinMOSI;
-    pinMosi = _pinMOSI;
-    pinSclk = _pinSCLK;
-    busNumber = _busNumber
-}
-
 bool FLProgSPI::begin()
 {
     if (!checkBus())
@@ -19,6 +11,16 @@ bool FLProgSPI::begin()
     }
     bus()->begin();
     return true;
+}
+
+
+SPIClass *FLProgSPI::bus()
+{
+    if (busNumber == 0)
+    {
+        return &SPI;
+    }
+    return 0;
 }
 
 void FLProgSPI::setBitOrder(uint8_t mode)
@@ -31,13 +33,5 @@ void FLProgSPI::setBitOrder(uint8_t mode)
     bus()->setBitOrder(mode);
 }
 
-SPIClass *FLProgSPI::bus()
-{
-    if (busNumber == 0)
-    {
-        return &SPI;
-    }
-    return 0;
-}
 
 #endif

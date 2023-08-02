@@ -15,7 +15,7 @@
 class FLProgSPI : public AbstractFLProgSPI
 {
 public:
-    FLProgSPI(uint8_t _busNumber = 0, int32_t _pinMOSI = -1, int32_t _pinMISO = -1, int32_t _pinSCLK = -1);
+    using AbstractFLProgSPI::AbstractFLProgSPI;
     virtual void setBitOrder(BitOrder mode);
     virtual bool begin();
 

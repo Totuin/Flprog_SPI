@@ -2,14 +2,6 @@
 
 #ifdef ARDUINO_ARCH_ESP8266
 
-FLProgSPI::FLProgSPI(uint8_t _busNumber, int32_t _pinMOSI, int32_t _pinMISO, int32_t _pinSCLK)
-{
-    pinMosi = _pinMOSI;
-    pinMosi = _pinMOSI;
-    pinSclk = _pinSCLK;
-    busNumber = _busNumber
-}
-
 bool FLProgSPI::begin()
 {
     if (!checkBus())
@@ -19,16 +11,6 @@ bool FLProgSPI::begin()
     }
     bus()->begin();
     return true;
-}
-
-void FLProgSPI::setBitOrder(uint8_t mode)
-{
-    if (!checkBus())
-    {
-        codeErr = 65;
-        return;
-    }
-    bus()->setBitOrder(mode);
 }
 
 SPIClass *FLProgSPI::bus()
@@ -60,6 +42,15 @@ void FLProgSPI::setFrequency(uint32_t freq)
         return;
     }
     bus()->setFrequency(freq);
+}
+void FLProgSPI::setBitOrder(uint8_t mode)
+{
+    if (!checkBus())
+    {
+        codeErr = 65;
+        return;
+    }
+    bus()->setBitOrder(mode);
 }
 
 #endif

@@ -1,4 +1,5 @@
 #pragma once
+#define FLPROG_SPI_LIBRARY
 #include "Arduino.h"
 #include <SPI.h>
 #include "flprogUtilites.h"
@@ -6,7 +7,8 @@
 class AbstractFLProgSPI
 {
 public:
-    bool begin();
+    AbstractFLProgSPI(uint8_t _busNumber = 0, int32_t _pinMOSI = -1, int32_t _pinMISO = -1, int32_t _pinSCLK = -1);
+    virtual bool begin() = 0;
     virtual bool begin(int32_t pinMOSI, int32_t pinMISO = -1, int32_t pinSCLK = -1);
     uint8_t getErrorCode() { return codeErr; };
     bool isReady() { return checkBus(); }
@@ -18,8 +20,8 @@ public:
 
     void setDataMode(uint8_t mode);
     void setClockDivider(uint8_t mode);
-    virtual void setFrequency(uint32_t freq){};
-    virtual void setHwCs(bool use){};
+    virtual void setFrequency(uint32_t freq) { (void)freq; };
+    virtual void setHwCs(bool use) { (void)use; };
 
     virtual void changePins(int32_t newMisoPin = -2, int32_t newMosiPin = -2, int32_t newSclkPin = -2);
     virtual void changeBus(uint8_t newBus);
@@ -32,7 +34,7 @@ protected:
     int32_t pinSclk = -1;
     uint8_t busNumber = 0;
     virtual bool checkBus();
-    virtual SPIClass *bus() { return 0; };
+    virtual SPIClass *bus() = 0;
     virtual void startBus();
     virtual void stopBus();
 };
@@ -72,3 +74,4 @@ protected:
 #define FLPROG_ANON_SELECT_SPI
 #include "variant/anon/flprogSpiAnon.h"
 #endif
+
