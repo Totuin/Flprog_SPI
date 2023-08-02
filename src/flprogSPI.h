@@ -6,8 +6,8 @@
 class AbstractFLProgSPI
 {
 public:
-    virtual bool begin();
-    virtual bool begin(int32_t pinMOSI, int32_t pinMISO, int32_t pinSCLK);
+    bool begin();
+    virtual bool begin(int32_t pinMOSI, int32_t pinMISO = -1, int32_t pinSCLK = -1);
     uint8_t getErrorCode() { return codeErr; };
     bool isReady() { return checkBus(); }
     void beginTransaction(SPISettings settings);
@@ -16,15 +16,14 @@ public:
     uint16_t transfer16(uint16_t data);
     void endTransaction();
 
-
     void setDataMode(uint8_t mode);
-    void setClockDivider(uint8_t mode) ;
+    void setClockDivider(uint8_t mode);
+    virtual void setFrequency(uint32_t freq){};
+    virtual void setHwCs(bool use){};
 
-
-
-    virtual void changePins(int32_t newMisoPin, int32_t newMosiPin, int32_t newSclkPin);
+    virtual void changePins(int32_t newMisoPin = -2, int32_t newMosiPin = -2, int32_t newSclkPin = -2);
     virtual void changeBus(uint8_t newBus);
-    virtual void changePinsAndBus(uint8_t newBus, int32_t newMisoPin, int32_t newMosiPin, int32_t newSclkPin);
+    virtual void changePinsAndBus(uint8_t newBus, int32_t newMisoPin = -2, int32_t newMosiPin = -2, int32_t newSclkPin = -2);
 
 protected:
     uint8_t codeErr = 0;

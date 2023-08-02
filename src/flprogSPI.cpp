@@ -91,20 +91,30 @@ void AbstractFLProgSPI::startBus()
 void AbstractFLProgSPI::changePins(int32_t newMisoPin, int32_t newMosiPin, int32_t newSclkPin)
 {
     bool hasChanged = false;
-    if (pinMosi != newMosiPin)
+    if (newMosiPin > -2)
     {
-        pinMosi != newMosiPin;
-        hasChanged = true;
+        if (pinMosi != newMosiPin)
+        {
+            pinMosi != newMosiPin;
+            hasChanged = true;
+        }
     }
-    if (pinMiso != newMisoPin)
+    if (newMisoPin > -2)
     {
-        pinMiso != newMosiPin;
-        hasChanged = true;
+        if (pinMiso != newMisoPin)
+        {
+            pinMiso != newMisoPin;
+            hasChanged = true;
+        }
     }
-    if (pinSclk != newSclkPin)
+    if (newSclkPin > -2)
     {
-        pinSclk != newSclkPin;
-        hasChanged = true;
+
+        if (pinSclk != newSclkPin)
+        {
+            pinSclk != newSclkPin;
+            hasChanged = true;
+        }
     }
     if (hasChanged)
     {
@@ -127,20 +137,29 @@ void AbstractFLProgSPI::changeBus(uint8_t newBus)
 void AbstractFLProgSPI::changePinsAndBus(uint8_t newBus, int32_t newMisoPin, int32_t newMosiPin, int32_t newSclkPin)
 {
     bool hasChanged = false;
-    if (pinMosi != newMosiPin)
+    if (newMosiPin > -2)
     {
-        pinMosi != newMosiPin;
-        hasChanged = true;
+        if (pinMosi != newMosiPin)
+        {
+            pinMosi != newMosiPin;
+            hasChanged = true;
+        }
     }
-    if (pinMiso != newMisoPin)
+    if (newMisoPin > -2)
     {
-        pinMiso != newMosiPin;
-        hasChanged = true;
+        if (pinMiso != newMisoPin)
+        {
+            pinMiso != newMisoPin;
+            hasChanged = true;
+        }
     }
-    if (pinSclk != newSclkPin)
+    if (newSclkPin > -2)
     {
-        pinSclk != newSclkPin;
-        hasChanged = true;
+        if (pinSclk != newSclkPin)
+        {
+            pinSclk != newSclkPin;
+            hasChanged = true;
+        }
     }
     if (busNumber != newBus)
     {

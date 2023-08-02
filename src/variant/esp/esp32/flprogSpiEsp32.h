@@ -15,9 +15,11 @@
 class FLProgSPI : public AbstractFLProgSPI
 {
 public:
-    FLProgSPI(uint8_t _busNumber = 0);
+    FLProgSPI(uint8_t _busNumber = 0, int32_t _pinMOSI = -1, int32_t _pinMISO = -1, int32_t _pinSCLK = -1);
     virtual bool begin();
     virtual void setBitOrder(uint8_t mode);
+    virtual void setFrequency(uint32_t freq);
+    virtual void setHwCs(bool use);
 
 protected:
     virtual SPIClass *bus();
