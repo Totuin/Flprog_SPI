@@ -48,7 +48,7 @@ bool FLProgSPI::begin()
     bus()->begin();
     return true;
 }
-
+/*
 void FLProgSPI::setBitOrder(BitOrder mode)
 {
     if (!checkBus())
@@ -58,8 +58,8 @@ void FLProgSPI::setBitOrder(BitOrder mode)
     }
     bus()->setBitOrder(mode);
 }
-
-SPIClass *FLProgSPI::bus()
+*/
+SPIClassRP2040 *FLProgSPI::bus()
 {
     if (busNumber == 0)
     {
@@ -72,7 +72,7 @@ SPIClass *FLProgSPI::bus()
     return 0;
 }
 
-void FLProgSPI::findDefaultPins(int32 *pins)
+void FLProgSPI::findDefaultPins(int32_t *pins)
 {
     if (busNumber == 0)
     {

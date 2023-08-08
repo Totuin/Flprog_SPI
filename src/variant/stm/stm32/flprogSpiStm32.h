@@ -45,13 +45,13 @@ class FLProgSPI : public AbstractFLProgSPI
 public:
     using AbstractFLProgSPI::AbstractFLProgSPI;
     virtual bool begin();
-    virtual void setBitOrder(BitOrder mode) { spi->setBitOrder(mode); };
+    virtual void setBitOrder(BitOrder mode);
 
 protected:
     virtual SPIClass *bus();
 
 private:
-    void findDefaultPins(int32 *pins);
+    void findDefaultPins(int32_t *pins);
 };
 
 #endif

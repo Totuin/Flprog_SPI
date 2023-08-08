@@ -92,7 +92,7 @@ SPIClass *FLProgSPI::bus()
     return 0;
 }
 
-void FLProgSPI::findDefaultPins(int32 *pins)
+void FLProgSPI::findDefaultPins(int32_t *pins)
 {
     if (busNumber == 0)
     {

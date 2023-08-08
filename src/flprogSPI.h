@@ -18,8 +18,8 @@ public:
     uint16_t transfer16(uint16_t data);
     void endTransaction();
 
-    void setDataMode(uint8_t mode);
-    void setClockDivider(uint8_t mode);
+    virtual void setDataMode(uint8_t mode);
+    virtual void setClockDivider(uint8_t mode);
     virtual void setFrequency(uint32_t freq) { (void)freq; };
     virtual void setHwCs(bool use) { (void)use; };
 
@@ -34,7 +34,12 @@ protected:
     int32_t pinSclk = -1;
     uint8_t busNumber = 0;
     virtual bool checkBus();
+
+#ifdef ARDUINO_ARCH_RP2040
+    virtual SPIClassRP2040 *bus() = 0;
+#else
     virtual SPIClass *bus() = 0;
+#endif
     virtual void startBus();
     virtual void stopBus();
 };
@@ -74,4 +79,3 @@ protected:
 #define FLPROG_ANON_SELECT_SPI
 #include "variant/anon/flprogSpiAnon.h"
 #endif
-

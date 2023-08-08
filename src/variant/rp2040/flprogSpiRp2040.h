@@ -3,7 +3,6 @@
 #include "flprogSPI.h"
 
 #ifdef ARDUINO_ARCH_RP2040
-
 #define FLPROG_SPI_MODE0 SPI_MODE0
 #define FLPROG_SPI_MODE1 SPI_MODE1
 #define FLPROG_SPI_MODE2 SPI_MODE2
@@ -16,14 +15,16 @@ class FLProgSPI : public AbstractFLProgSPI
 {
 public:
     using AbstractFLProgSPI::AbstractFLProgSPI;
-    virtual void setBitOrder(BitOrder mode);
+    virtual void setBitOrder(BitOrder mode) { (void)mode; };
+    virtual void setDataMode(uint8_t mode) { (void)mode; };
+    virtual void setClockDivider(uint8_t mode) { (void)mode; };
     virtual bool begin();
 
 protected:
-    virtual SPIClass *bus();
+    virtual SPIClassRP2040 *bus();
 
 private:
-    void findDefaultPins(int32 *pins);
+    void findDefaultPins(int32_t *pins);
 };
 
 #endif
