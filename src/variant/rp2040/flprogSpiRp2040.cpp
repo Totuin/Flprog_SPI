@@ -10,7 +10,9 @@ bool FLProgSPI::begin()
         return false;
     }
     int32_t pins[3] = {-1, -1, -1};
+
     findDefaultPins(pins);
+
     if (pinMiso == -1)
     {
         if (pins[0] > -1)
