@@ -3,6 +3,7 @@
 #include "flprogSPI.h"
 
 #ifdef ARDUINO_ARCH_RP2040
+
 #define FLPROG_SPI_MODE0 SPI_MODE0
 #define FLPROG_SPI_MODE1 SPI_MODE1
 #define FLPROG_SPI_MODE2 SPI_MODE2
